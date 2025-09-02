@@ -1,0 +1,82 @@
+[
+  {
+    "id": "emergency-101",
+    "type": "emergency",
+    "title": "מד\"א - שירותי חירום",
+    "titleEn": "Magen David Adom - Emergency Services",
+    "description": "שירותי חירום רפואיים זמינים 24/7 בישראל",
+    "descriptionEn": "24/7 medical emergency services in Israel",
+    "url": "tel:101",
+    "priority": 1
+  },
+  {
+    "id": "cancer-association",
+    "type": "resource",
+    "title": "האגודה למלחמה בסרטן",
+    "titleEn": "Israel Cancer Association",
+    "description": "מידע מקיף, תמיכה וליווי למטופלות סרטן ומשפחותיהן",
+    "descriptionEn": "Comprehensive information, support and guidance for cancer patients and families",
+    "url": "https://cancer.org.il",
+    "priority": 2
+  },
+  {
+    "id": "beit-melchior",
+    "type": "resource", 
+    "title": "בית מלכיאור",
+    "titleEn": "Beit Melchior",
+    "description": "מרכז תמיכה והקלה בכאב למטופלי סרטן - יעוץ וטיפולים משלימים",
+    "descriptionEn": "Support center and pain relief for cancer patients - counseling and complementary treatments",
+    "url": "https://beitmelchior.org",
+    "priority": 3
+  },
+  {
+    "id": "yad-lehahlama",
+    "type": "resource",
+    "title": "יד להחלמה",
+    "titleEn": "Yad Lehahlama", 
+    "description": "ארגון לתמיכה בחולי סרטן ומשפחותיהם - קבוצות תמיכה ופעילויות",
+    "descriptionEn": "Organization supporting cancer patients and families - support groups and activities",
+    "url": "https://www.yadlehahlama.org.il",
+    "priority": 4
+  },
+  {
+    "id": "amutay-women",
+    "type": "resource",
+    "title": "אמותיי - נשים נגד סרטן",
+    "titleEn": "Amutay - Women Against Cancer",
+    "description": "קהילה תומכת לנשים חולות סרטן - חוויות, עצות ועידוד",
+    "descriptionEn": "Supportive community for women with cancer - experiences, advice and encouragement", 
+    "url": "https://www.amutay.org.il",
+    "priority": 5
+  },
+  {
+    "id": "mental-health-hotline",
+    "type": "emergency",
+    "title": "קו חירום לבריאות הנפש",
+    "titleEn": "Mental Health Emergency Hotline",
+    "description": "תמיכה מיידית במצבי משבר נפשי - זמין 24/7",
+    "descriptionEn": "Immediate support in mental health crisis - available 24/7",
+    "url": "tel:1201",
+    "priority": 2
+  },
+  {
+    "id": "zug-beyachad",
+    "type": "resource",
+    "title": "זוג ביחד",
+    "titleEn": "Zug Beyachad",
+    "description": "תמיכה לזוגות המתמודדים עם מחלת הסרטן",
+    "descriptionEn": "Support for couples dealing with cancer",
+    "url": "https://www.zugbeyachad.org.il",
+    "priority": 6
+  },
+  {
+    "id": "larger-than-life",
+    "type": "resource",
+    "title": "גדולים מהחיים",
+    "titleEn": "Larger Than Life", 
+    "description": "תמיכה לצעירים ומבוגרים צעירים חולי סרטן",
+    "descriptionEn": "Support for young adults with cancer",
+    "url": "https://www.largerthanlife.org.il",
+    "priority": 7
+  }
+]
