@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, Alert } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Alert, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTranslation } from 'react-i18next';
+import { useNavigation } from 'expo-router';
 import { 
   Globe, 
   Palette, 
@@ -18,10 +19,14 @@ import { setLanguage, setTheme, setFontSize } from '@/src/store/slices/settingsS
 import { clearMessages } from '@/src/store/slices/chatSlice';
 import { useTheme } from '@/src/theme/useTheme';
 import { spacing, typography } from '@/src/theme/tokens';
+import { Menu } from 'lucide-react-native';
+import Svg, { Defs, RadialGradient as SvgRadialGradient, Rect, Stop } from 'react-native-svg';
+import { ChatHeader } from '@/src/components/ChatHeader';
 
 export default function ProfileScreen() {
   const { t, i18n } = useTranslation();
   const dispatch = useAppDispatch();
+  const navigation = useNavigation<any>();
   const { colors } = useTheme();
   const { language, theme, fontSize, isRTL } = useAppSelector(state => state.settings);
 
@@ -56,26 +61,30 @@ export default function ProfileScreen() {
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: colors.bg,
+      backgroundColor: '#000',
     },
-    header: {
-      paddingHorizontal: spacing.lg,
-      paddingVertical: spacing.xl,
-      borderBottomWidth: 1,
-      borderBottomColor: colors.borderLight,
+    gradient: {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
     },
     title: {
       fontSize: typography.fontSize.xxxl,
       fontWeight: typography.fontWeight.bold,
-      color: colors.ink,
+      color: '#FFFFFF',
       textAlign: isRTL ? 'right' : 'left',
+      marginHorizontal: spacing.lg,
+      marginTop: spacing.lg,
       marginBottom: spacing.sm,
     },
     subtitle: {
       fontSize: typography.fontSize.base,
-      color: colors.mutedInk,
+      color: '#E5E7EB',
       textAlign: isRTL ? 'right' : 'left',
       lineHeight: typography.lineHeight.relaxed * typography.fontSize.base,
+      marginHorizontal: spacing.lg,
     },
     section: {
       marginTop: spacing.xl,
@@ -83,7 +92,7 @@ export default function ProfileScreen() {
     sectionTitle: {
       fontSize: typography.fontSize.lg,
       fontWeight: typography.fontWeight.semibold,
-      color: colors.ink,
+      color: '#FFFFFF',
       textAlign: isRTL ? 'right' : 'left',
       marginHorizontal: spacing.lg,
       marginBottom: spacing.md,
@@ -100,6 +109,13 @@ export default function ProfileScreen() {
       color: colors.ink,
       textAlign: isRTL ? 'right' : 'left',
       lineHeight: typography.lineHeight.relaxed * typography.fontSize.sm,
+    },
+    menuButton: {
+      position: 'absolute',
+      top: spacing.lg,
+      [isRTL ? 'left' : 'right']: spacing.lg,
+      padding: spacing.sm,
+      borderRadius: 12,
     },
   });
 
@@ -121,15 +137,28 @@ export default function ProfileScreen() {
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
-      <View style={styles.header}>
-        <Text style={styles.title}>{t('profile')}</Text>
-        <Text style={styles.subtitle}>
-          {isRTL 
-            ? 'נהלי את ההעדפות והפרטיות שלך'
-            : 'Manage your preferences and privacy'
-          }
-        </Text>
+      <View style={styles.gradient} pointerEvents="none">
+        <Svg width="100%" height="100%">
+          <Defs>
+            <SvgRadialGradient id="bgGlow" cx="0%" cy="100%" rx="140%" ry="110%" fx="0%" fy="100%">
+              <Stop offset="0%" stopColor="#b277f1" stopOpacity="0.45" />
+              <Stop offset="18%" stopColor="#b277f1" stopOpacity="0.36" />
+              <Stop offset="38%" stopColor="#7c3aed" stopOpacity="0.22" />
+              <Stop offset="68%" stopColor="#3b1a6d" stopOpacity="0.12" />
+              <Stop offset="100%" stopColor="#000000" stopOpacity="0" />
+            </SvgRadialGradient>
+          </Defs>
+          <Rect x="0" y="0" width="100%" height="100%" fill="url(#bgGlow)" />
+        </Svg>
       </View>
+      <ChatHeader />
+      <Text style={styles.title}>{t('profile')}</Text>
+      <Text style={styles.subtitle}>
+        {isRTL 
+          ? 'נהלי את ההעדפות והפרטיות שלך'
+          : 'Manage your preferences and privacy'
+        }
+      </Text>
       
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.section}>

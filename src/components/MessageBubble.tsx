@@ -18,7 +18,8 @@ export function MessageBubble({ message, isRTL }: MessageBubbleProps) {
   const styles = StyleSheet.create({
     container: {
       flexDirection: isRTL ? 'row-reverse' : 'row',
-      justifyContent: isUser ? (isRTL ? 'flex-start' : 'flex-end') : (isRTL ? 'flex-end' : 'flex-start'),
+      // Invert alignment: assistant/system to right, user to left
+      justifyContent: isUser ? (isRTL ? 'flex-end' : 'flex-start') : (isRTL ? 'flex-start' : 'flex-end'),
       marginVertical: spacing.xs,
       marginHorizontal: spacing.lg,
     },

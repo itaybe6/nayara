@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import chatSlice from './slices/chatSlice';
+import sessionsSlice from './slices/sessionsSlice';
 import settingsSlice from './slices/settingsSlice';
 import userSlice from './slices/userSlice';
 import uiSlice from './slices/uiSlice';
@@ -7,6 +8,7 @@ import uiSlice from './slices/uiSlice';
 export const store = configureStore({
   reducer: {
     chat: chatSlice,
+    sessions: sessionsSlice,
     settings: settingsSlice,
     user: userSlice,
     ui: uiSlice,

@@ -9,7 +9,7 @@ export const colors = {
   ink: '#111827',
   mutedInk: '#6B7280',
   lightInk: '#9CA3AF',
-  bg: '#FFFFFF',
+  bg: '#F5F7FA',
   bgAlt: '#F8FAFC',
   bgCard: '#FFFFFF',
 

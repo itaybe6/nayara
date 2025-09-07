@@ -1,3 +1,4 @@
+import 'react-native-reanimated';
 import React, { useEffect } from 'react';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
@@ -10,7 +11,6 @@ import * as SplashScreen from 'expo-splash-screen';
 import { store } from '@/src/store';
 import { useFrameworkReady } from '@/hooks/useFrameworkReady';
 import '@/src/services/i18n';
-import { LinearGradient } from 'expo-linear-gradient';
 import { useTheme } from '@/src/theme/useTheme';
 
 // Prevent the splash screen from auto-hiding
@@ -43,12 +43,6 @@ function RootLayoutNav() {
 
   return (
     <View style={{ flex: 1 }}>
-      <LinearGradient
-        colors={[colors.gradientPrimaryStart, colors.gradientPrimaryEnd]}
-        start={{ x: 0.1, y: 0 }}
-        end={{ x: 0.9, y: 0.6 }}
-        style={{ position: 'absolute', top: -120, left: -60, right: -60, height: 320, borderBottomLeftRadius: 200, borderBottomRightRadius: 200, opacity: 0.45 }}
-      />
       <Stack screenOptions={{ headerShown: false }}>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />

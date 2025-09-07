@@ -49,6 +49,10 @@ const chatSlice = createSlice({
     setQuickReplies: (state, action: PayloadAction<string[]>) => {
       state.quickReplies = action.payload;
     },
+    setMessages: (state, action: PayloadAction<Message[]>) => {
+      state.messages = action.payload;
+      state.hasStartedChat = action.payload.length > 0;
+    },
     startChat: (state) => {
       state.hasStartedChat = true;
       // Add welcome message if none exists

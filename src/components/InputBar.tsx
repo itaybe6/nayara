@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, TextInput, TouchableOpacity, StyleSheet, KeyboardAvoidingView, Platform } from 'react-native';
 import { BlurView } from 'expo-blur';
 import { useTranslation } from 'react-i18next';
-import { Send } from 'lucide-react-native';
+import { Send, Mic } from 'lucide-react-native';
 import { useTheme } from '../theme/useTheme';
 import { spacing, typography, borderRadius, shadows } from '../theme/tokens';
 
@@ -26,28 +26,31 @@ export function InputBar({ onSend, isRTL, disabled = false }: InputBarProps) {
 
   const styles = StyleSheet.create({
     keyboardView: {
+      position: 'absolute',
+      left: 0,
+      right: 0,
+      bottom: spacing.lg,
       backgroundColor: 'transparent',
     },
     container: {
-      flexDirection: isRTL ? 'row-reverse' : 'row',
-      alignItems: 'center',
       paddingHorizontal: spacing.lg,
       paddingVertical: spacing.md,
       backgroundColor: 'transparent',
-      borderTopWidth: 1,
-      borderTopColor: colors.darkBorder,
-      gap: spacing.md,
     },
     inputContainer: {
-      flex: 1,
-      backgroundColor: colors.glassBg,
+      flexDirection: isRTL ? 'row-reverse' : 'row',
+      alignItems: 'center',
+      backgroundColor: 'rgba(124,58,237,0.18)',
       borderRadius: borderRadius.full,
       borderWidth: 1,
-      borderColor: colors.glassBorder,
+      borderColor: 'rgba(124,58,237,0.35)',
       paddingHorizontal: spacing.lg,
       paddingVertical: spacing.md,
+      gap: spacing.md,
+      ...shadows.lg,
     },
     input: {
+      flex: 1,
       fontSize: typography.fontSize.base,
       color: colors.darkInk,
       textAlign: isRTL ? 'right' : 'left',
@@ -61,6 +64,13 @@ export function InputBar({ onSend, isRTL, disabled = false }: InputBarProps) {
     },
     sendButtonDisabled: {
       backgroundColor: colors.lightInk,
+    },
+    micButton: {
+      backgroundColor: colors.glassBg,
+      borderRadius: borderRadius.full,
+      padding: spacing.md,
+      borderWidth: 1,
+      borderColor: colors.glassBorder,
     },
   });
 
@@ -83,17 +93,24 @@ export function InputBar({ onSend, isRTL, disabled = false }: InputBarProps) {
             accessibilityLabel={t('messageInputLabel')}
             accessibilityHint={t('messageInputHint')}
           />
+          <TouchableOpacity
+            style={styles.micButton}
+            onPress={() => {}}
+            accessibilityLabel={t('recordVoice')}
+            accessibilityRole="button"
+          >
+            <Mic size={20} color={colors.bg} />
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.sendButton, disabled || !message.trim() ? styles.sendButtonDisabled : undefined]}
+            onPress={handleSend}
+            disabled={disabled || !message.trim()}
+            accessibilityLabel={t('send')}
+            accessibilityRole="button"
+          >
+            <Send size={20} color={colors.bg} />
+          </TouchableOpacity>
         </View>
-        
-        <TouchableOpacity
-          style={[styles.sendButton, disabled && styles.sendButtonDisabled]}
-          onPress={handleSend}
-          disabled={disabled || !message.trim()}
-          accessibilityLabel={t('send')}
-          accessibilityRole="button"
-        >
-          <Send size={20} color={colors.bg} />
-        </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>
   );

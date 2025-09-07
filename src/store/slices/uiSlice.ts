@@ -7,7 +7,7 @@ interface UiState {
 }
 
 const initialState: UiState = {
-  showSafetyBanner: true,
+  showSafetyBanner: false,
   showEmergencyDialog: false,
   isLoading: false,
 };

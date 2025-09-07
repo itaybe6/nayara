@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { View, StyleSheet, Alert } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import { FlashList } from '@shopify/flash-list';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useAppDispatch, useAppSelector } from '@/src/store/hooks';
@@ -10,7 +11,7 @@ import { MessageBubble } from '@/src/components/MessageBubble';
 import { TypingIndicator } from '@/src/components/TypingIndicator';
 import { InputBar } from '@/src/components/InputBar';
 import { QuickReplies } from '@/src/components/QuickReplies';
-import { SafetyBanner } from '@/src/components/SafetyBanner';
+// import { SafetyBanner } from '@/src/components/SafetyBanner';
 import { EmergencyDialog } from '@/src/components/EmergencyDialog';
 import { chatService } from '@/src/services/chatService';
 import { moderateMessage } from '@/src/services/moderationService';
@@ -73,13 +74,20 @@ export default function ChatScreen() {
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: colors.bg,
+      backgroundColor: 'transparent',
     },
     listContainer: {
       flex: 1,
     },
     listContent: {
       paddingTop: 8,
+    },
+    gradient: {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
     },
   });
 
@@ -93,8 +101,14 @@ export default function ChatScreen() {
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
+      <LinearGradient
+        colors={['#000000', '#0b0620', '#2b0f5a', '#5b2dcf']}
+        locations={[0, 0.35, 0.7, 1]}
+        start={{ x: 0.5, y: 0 }}
+        end={{ x: 0.5, y: 1 }}
+        style={styles.gradient}
+      />
       <ChatHeader />
-      <SafetyBanner />
       
       <View style={styles.listContainer}>
         <FlashList
@@ -110,7 +124,6 @@ export default function ChatScreen() {
         />
       </View>
       
-      <QuickReplies onSelect={handleQuickReply} isRTL={isRTL} />
       <InputBar onSend={handleSendMessage} isRTL={isRTL} disabled={isTyping} />
       
       <EmergencyDialog />

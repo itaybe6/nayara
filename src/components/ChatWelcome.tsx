@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { Heart, MessageCircle, BookOpen } from 'lucide-react-native';
 import { useTheme } from '../theme/useTheme';
@@ -21,28 +21,23 @@ export function ChatWelcome({ onStartChat, isRTL }: ChatWelcomeProps) {
       paddingTop: spacing.xxxl,
       backgroundColor: colors.bg,
     },
-    iconContainer: {
-      width: 100,
-      height: 100,
-      borderRadius: borderRadius.full,
-      backgroundColor: colors.primaryRose,
-      justifyContent: 'center',
-      alignItems: 'center',
+    logo: {
+      width: 160,
+      height: 48,
       alignSelf: 'center',
       marginBottom: spacing.xl,
-      ...shadows.lg,
     },
     title: {
       fontSize: 32,
       fontWeight: typography.fontWeight.bold,
-      color: colors.darkInk,
+      color: colors.primaryRose,
       textAlign: 'center',
       marginBottom: spacing.lg,
       lineHeight: 38,
     },
     subtitle: {
       fontSize: typography.fontSize.lg,
-      color: colors.darkMutedInk,
+      color: '#F8BFBE',
       textAlign: 'center',
       lineHeight: typography.lineHeight.relaxed * typography.fontSize.lg,
       marginBottom: spacing.xxxl,
@@ -119,9 +114,12 @@ export function ChatWelcome({ onStartChat, isRTL }: ChatWelcomeProps) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.iconContainer}>
-        <Heart size={50} color={colors.bg} fill={colors.bg} />
-      </View>
+      <Image
+        source={require('../../assets/images/nayara-07.png')}
+        style={styles.logo}
+        resizeMode="contain"
+        accessibilityLabel="Nayara logo"
+      />
       
       <Text style={styles.title}>שלום, אני ניארה</Text>
       

@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { useNavigation } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import { MoveVertical as MoreVertical, Heart } from 'lucide-react-native';
+import { Menu, Heart } from 'lucide-react-native';
 import { useAppSelector, useAppDispatch } from '../store/hooks';
 import { clearMessages } from '../store/slices/chatSlice';
 import { useTheme } from '../theme/useTheme';
@@ -13,9 +14,15 @@ export function ChatHeader() {
   const { isRTL } = useAppSelector(state => state.settings);
   const { hasStartedChat } = useAppSelector(state => state.chat);
   const dispatch = useAppDispatch();
+  const navigation = useNavigation<any>();
 
-  const handleClearChat = () => {
-    dispatch(clearMessages());
+  const handleOpenDrawer = () => {
+    // Open drawer if available; fallback: clear chat (previous behavior)
+    if (typeof navigation?.openDrawer === 'function') {
+      navigation.openDrawer();
+    } else {
+      dispatch(clearMessages());
+    }
   };
 
   const styles = StyleSheet.create({
@@ -26,13 +33,17 @@ export function ChatHeader() {
       paddingHorizontal: spacing.lg,
       paddingVertical: spacing.lg,
       backgroundColor: 'transparent',
-      borderBottomWidth: 1,
-      borderBottomColor: colors.darkBorder,
+      borderBottomWidth: 0,
+      borderBottomColor: 'transparent',
     },
     brandContainer: {
       flexDirection: isRTL ? 'row-reverse' : 'row',
       alignItems: 'center',
       gap: spacing.md,
+    },
+    logo: {
+      height: 24,
+      width: 110,
     },
     iconContainer: {
       width: 36,
@@ -73,30 +84,26 @@ export function ChatHeader() {
     },
   });
 
-  if (!hasStartedChat) return null;
+  // Always show brand + menu even before chat starts
 
   return (
     <View style={styles.header}>
-      <View style={styles.brandContainer}>
-        <View style={styles.iconContainer}>
-          <Heart size={20} color={colors.bg} fill={colors.bg} />
-        </View>
-        <View style={styles.titleContainer}>
-          <Text style={styles.title}>{t('appName')}</Text>
-          <View style={styles.statusContainer}>
-            <View style={styles.statusDot} />
-            <Text style={styles.statusText}>{t('online')}</Text>
-          </View>
-        </View>
-      </View>
-      
       <TouchableOpacity 
         style={styles.menuButton} 
-        onPress={handleClearChat}
-        accessibilityLabel={t('clearChat')}
+        onPress={handleOpenDrawer}
+        accessibilityLabel={t('menu')}
       >
-        <MoreVertical size={20} color={colors.mutedInk} />
+        <Menu size={20} color="#FFFFFF" />
       </TouchableOpacity>
+      
+      <View style={styles.brandContainer}>
+        <Image
+          source={require('../../assets/images/nayara loo-08.png')}
+          style={styles.logo}
+          resizeMode="contain"
+          accessibilityLabel="Nayara logo"
+        />
+      </View>
     </View>
   );
 }

@@ -7,9 +7,11 @@ import { spacing, typography, borderRadius } from '../theme/tokens';
 interface QuickRepliesProps {
   onSelect: (reply: string) => void;
   isRTL: boolean;
+  isFixedAboveInput?: boolean;
+  bottomOffset?: number;
 }
 
-export function QuickReplies({ onSelect, isRTL }: QuickRepliesProps) {
+export function QuickReplies({ onSelect, isRTL, isFixedAboveInput = false, bottomOffset = 88 }: QuickRepliesProps) {
   const { t } = useTranslation();
   const { colors } = useTheme();
 
@@ -24,6 +26,11 @@ export function QuickReplies({ onSelect, isRTL }: QuickRepliesProps) {
     container: {
       paddingHorizontal: spacing.lg,
       paddingVertical: spacing.sm,
+      position: isFixedAboveInput ? 'absolute' : 'relative',
+      left: 0,
+      right: 0,
+      bottom: isFixedAboveInput ? bottomOffset : undefined,
+      zIndex: 5,
     },
     scrollContainer: {
       paddingRight: isRTL ? 0 : spacing.lg,

@@ -25,7 +25,9 @@ export function SettingsRow({
 
   const styles = StyleSheet.create({
     container: {
-      backgroundColor: colors.bgCard,
+      backgroundColor: 'rgba(124,58,237,0.18)',
+      borderWidth: 1,
+      borderColor: 'rgba(124,58,237,0.35)',
       borderRadius: borderRadius.lg,
       marginHorizontal: spacing.lg,
       marginVertical: spacing.xs,
@@ -48,12 +50,12 @@ export function SettingsRow({
     title: {
       fontSize: typography.fontSize.base,
       fontWeight: typography.fontWeight.medium,
-      color: colors.ink,
+      color: '#FFFFFF',
       textAlign: isRTL ? 'right' : 'left',
     },
     subtitle: {
       fontSize: typography.fontSize.sm,
-      color: colors.mutedInk,
+      color: '#E5E7EB',
       marginTop: 2,
       textAlign: isRTL ? 'right' : 'left',
     },
