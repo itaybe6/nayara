@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useTheme } from '@/src/theme/useTheme';
 import { useAppSelector } from '@/src/store/hooks';
 import { BlurView } from 'expo-blur';
+import FloatingTabBar from '@/src/components/FloatingTabBar';
 
 export default function TabLayout() {
   const { t } = useTranslation();
@@ -15,17 +16,17 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         headerShown: false,
+        tabBarShowLabel: true,
         tabBarActiveTintColor: colors.lavender,
         tabBarInactiveTintColor: colors.darkMutedInk,
         tabBarStyle: {
           position: 'absolute',
           backgroundColor: 'transparent',
-          borderTopColor: colors.darkBorder,
-          borderTopWidth: 1,
+          borderTopColor: 'transparent',
+          borderTopWidth: 0,
+          height: 0,
         },
-        tabBarBackground: () => (
-          <BlurView intensity={24} tint="dark" style={{ flex: 1, backgroundColor: 'rgba(15,23,42,0.35)' }} />
-        ),
+        tabBarBackground: () => null,
         tabBarLabelStyle: {
           fontSize: 12,
           fontWeight: '500',
@@ -59,6 +60,9 @@ export default function TabLayout() {
           ),
         }}
       />
+      {/* Floating custom bar overlay */}
+      {/* @ts-ignore - placed as sibling for overlay; it's fine in runtime */}
+      <FloatingTabBar />
     </Tabs>
   );
 }
