@@ -68,5 +68,5 @@ const chatSlice = createSlice({
   },
 });
 
-export const { addMessage, setTyping, clearMessages, setQuickReplies, startChat } = chatSlice.actions;
+export const { addMessage, setTyping, clearMessages, setQuickReplies, setMessages, startChat } = chatSlice.actions;
 export default chatSlice.reducer;
